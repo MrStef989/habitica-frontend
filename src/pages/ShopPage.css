@@ -1,0 +1,128 @@
+.shop-page {}
+
+.shop-gold {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  padding: 0.4rem 0.9rem;
+  border-color: var(--gold-dim);
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.75rem;
+}
+
+.shop-card {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.shop-card:hover {
+  border-color: var(--border-hi);
+  transform: translateY(-2px);
+}
+
+.shop-card--owned {
+  opacity: 0.6;
+}
+
+.shop-card--equipped {
+  border-color: var(--gold-dim);
+  background: rgba(232, 160, 48, 0.04);
+}
+
+.shop-card-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 36px;
+  text-align: center;
+  padding-top: 2px;
+}
+
+.shop-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.shop-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.shop-item-name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shop-item-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.shop-stats {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+}
+
+.shop-stat {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 99px;
+  border: 1px solid;
+}
+
+.shop-stat--str {
+  color: var(--gold);
+  background: rgba(232,160,48,0.1);
+  border-color: var(--gold-dim);
+}
+
+.shop-stat--con {
+  color: var(--xp);
+  background: rgba(91,141,238,0.1);
+  border-color: rgba(91,141,238,0.4);
+}
+
+.shop-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.shop-price {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+}
+
+.shop-buy-btn {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.7rem;
+}
+
+.shop-buy-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

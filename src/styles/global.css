@@ -1,0 +1,230 @@
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --bg:        #0d0c0f;
+  --bg-2:      #141218;
+  --bg-3:      #1c1a22;
+  --bg-4:      #252330;
+  --border:    rgba(255,255,255,0.08);
+  --border-hi: rgba(255,255,255,0.16);
+
+  --gold:      #e8a030;
+  --gold-dim:  #9a6a1a;
+  --gold-glow: rgba(232,160,48,0.20);
+
+  --hp:        #e05555;
+  --hp-dim:    #7a2525;
+  --xp:        #5b8dee;
+  --xp-dim:    #1e3a7a;
+
+  --green:     #4caf7d;
+  --red:       #e05555;
+  --purple:    #9b6dff;
+
+  --text:      #e8e4dc;
+  --text-2:    #9e99910;
+  --text-muted:#6b6560;
+
+  --font-display: 'Cinzel', Georgia, serif;
+  --font-body:    'Crimson Pro', Georgia, serif;
+
+  --radius:    6px;
+  --radius-lg: 12px;
+  --transition: 180ms ease;
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: inherit; }
+input, textarea { font-family: inherit; }
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-2); }
+::-webkit-scrollbar-thumb { background: var(--bg-4); border-radius: 3px; }
+
+/* ── Utility classes ───────────────────────────────────────── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+/* ── Animations ────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 var(--gold-glow); }
+  50%       { box-shadow: 0 0 0 8px transparent; }
+}
+
+@keyframes xp-fill {
+  from { width: 0%; }
+  to   { width: var(--xp-pct); }
+}
+
+.fade-up {
+  animation: fadeUp 320ms ease both;
+}
+
+/* ── Common components ─────────────────────────────────────── */
+.card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.2rem;
+  border: 1px solid var(--border-hi);
+  border-radius: var(--radius);
+  background: var(--bg-3);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+}
+.btn:hover { background: var(--bg-4); border-color: var(--gold-dim); }
+.btn:active { transform: scale(0.97); }
+
+.btn-gold {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #1a0e00;
+  font-weight: 600;
+}
+.btn-gold:hover { background: #f0b040; border-color: #f0b040; }
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-muted);
+}
+.btn-ghost:hover { color: var(--text); background: var(--bg-3); border-color: var(--border); }
+
+.btn-danger {
+  background: transparent;
+  border-color: var(--hp-dim);
+  color: var(--hp);
+}
+.btn-danger:hover { background: var(--hp-dim); border-color: var(--hp); }
+
+/* Form elements */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.field label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.field input, .field select, .field textarea {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  padding: 0.6rem 0.85rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--gold-dim);
+}
+.field select option { background: var(--bg-3); }
+
+/* Error text */
+.error-text { color: var(--hp); font-size: 0.875rem; }
+
+/* Progress bars */
+.bar-wrap {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-4);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.bar-hp   { background: var(--hp); }
+.bar-xp   { background: var(--xp); }
+.bar-gold { background: var(--gold); }
+
+/* Stat pill */
+.stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  font-size: 0.875rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 99px;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.badge-trivial { background: rgba(107,101,96,0.3); color: var(--text-muted); border: 1px solid rgba(107,101,96,0.4); }
+.badge-easy    { background: rgba(76,175,125,0.15); color: var(--green); border: 1px solid rgba(76,175,125,0.3); }
+.badge-medium  { background: rgba(91,141,238,0.15); color: var(--xp); border: 1px solid rgba(91,141,238,0.3); }
+.badge-hard    { background: rgba(232,160,48,0.15); color: var(--gold); border: 1px solid rgba(232,160,48,0.3); }
+
+.badge-habit  { background: rgba(155,109,255,0.15); color: var(--purple); border: 1px solid rgba(155,109,255,0.3); }
+.badge-daily  { background: rgba(91,141,238,0.15); color: var(--xp); border: 1px solid rgba(91,141,238,0.3); }
+.badge-todo   { background: rgba(76,175,125,0.15); color: var(--green); border: 1px solid rgba(76,175,125,0.3); }

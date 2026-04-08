@@ -1,0 +1,40 @@
+.toast-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-hi);
+  background: var(--bg-3);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  pointer-events: all;
+  cursor: pointer;
+  animation: fadeUp 240ms ease both;
+  backdrop-filter: blur(8px);
+  max-width: 280px;
+}
+
+.toast-icon {
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.toast-xp          { border-color: var(--xp);     color: var(--xp); }
+.toast-gold        { border-color: var(--gold-dim); color: var(--gold); }
+.toast-levelup     { border-color: var(--gold); color: var(--gold); background: rgba(232,160,48,0.12); animation: fadeUp 240ms ease both, pulse-gold 1s ease 240ms; }
+.toast-damage      { border-color: var(--hp-dim); color: var(--hp); }
+.toast-error       { border-color: var(--hp-dim); color: var(--hp); }
+.toast-achievement { border-color: var(--purple); color: var(--purple); }
